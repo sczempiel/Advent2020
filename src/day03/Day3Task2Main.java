@@ -9,8 +9,8 @@ public class Day3Task2Main {
 
 	public static void main(String[] args) {
 		try {
-			int[] xGrouth = new int[] { 1, 3, 5, 7, 1 };
-			int[] yGrouth = new int[] { 1, 1, 1, 1, 2 };
+			int[] xGrowth = new int[] { 1, 3, 5, 7, 1 };
+			int[] yGrowth = new int[] { 1, 1, 1, 1, 2 };
 
 			List<String> lines = AdventUtils.getStringInput(3);
 
@@ -18,18 +18,18 @@ public class Day3Task2Main {
 
 			long totalHits = 1;
 
-			for (int g = 0; g < xGrouth.length; g++) {
+			for (int g = 0; g < xGrowth.length; g++) {
 
 				int x = 0;
 				int hits = 0;
 
-				for (int y = 0; y < lines.size(); y = y + yGrouth[g]) {
+				for (int y = 0; y < lines.size(); y = y + yGrowth[g]) {
 
 					if (lines.get(y).charAt(x) == '#') {
 						hits++;
 					}
 
-					x = (x + xGrouth[g]) % lineLength;
+					x = (x + xGrowth[g]) % lineLength;
 				}
 
 				totalHits *= hits;
