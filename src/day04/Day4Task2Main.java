@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import util.AdventUtils;
-import util.Touple;
+import util.Tuple;
 
 public class Day4Task2Main {
 
@@ -23,7 +23,7 @@ public class Day4Task2Main {
 
 			int valid = 0;
 
-			List<Touple<String, String>> found = new ArrayList<>();
+			List<Tuple<String, String>> found = new ArrayList<>();
 
 			for (String line : startValues) {
 
@@ -43,7 +43,7 @@ public class Day4Task2Main {
 				for (String prop : splitted) {
 					String[] splitProp = prop.split(":");
 
-					found.add(new Touple<>(splitProp[0], splitProp[1]));
+					found.add(new Tuple<>(splitProp[0], splitProp[1]));
 				}
 
 			}
@@ -59,9 +59,9 @@ public class Day4Task2Main {
 		}
 	}
 
-	private static boolean passValid(List<Touple<String, String>> found) {
+	private static boolean passValid(List<Tuple<String, String>> found) {
 		for (String req : REQS) {
-			List<String> keys = found.stream().map(Touple::getLeft).collect(Collectors.toList());
+			List<String> keys = found.stream().map(Tuple::getLeft).collect(Collectors.toList());
 			if (!keys.contains(req)) {
 				return false;
 			}
@@ -74,7 +74,7 @@ public class Day4Task2Main {
 		Set<String> eyeColor = new HashSet<>(
 				Arrays.asList(new String[] { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" }));
 
-		for (Touple<String, String> prop : found) {
+		for (Tuple<String, String> prop : found) {
 
 			switch (prop.getLeft()) {
 			case "byr":

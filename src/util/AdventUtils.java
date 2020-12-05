@@ -197,13 +197,13 @@ public class AdventUtils {
 		}
 	}
 
-	public static <T> String printMap(Map<Touple<Integer, Integer>, T> map, Function<T, String> printValue) {
+	public static <T> String printMap(Map<Tuple<Integer, Integer>, T> map, Function<T, String> printValue) {
 		Integer smallestY = null;
 		Integer biggestY = null;
 		Integer smallestX = null;
 		Integer biggestX = null;
 
-		for (Touple<Integer, Integer> pos : map.keySet()) {
+		for (Tuple<Integer, Integer> pos : map.keySet()) {
 
 			int y = pos.getLeft();
 			int x = pos.getRight();
@@ -229,7 +229,7 @@ public class AdventUtils {
 
 		for (int y = smallestY; y <= biggestY; y++) {
 			for (int x = smallestX; x <= biggestX; x++) {
-				sb.append(printValue.apply(map.get(new Touple<>(y, x))));
+				sb.append(printValue.apply(map.get(new Tuple<>(y, x))));
 			}
 
 			if (y < biggestY) {

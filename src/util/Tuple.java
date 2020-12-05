@@ -1,14 +1,14 @@
 package util;
 
-public class Touple<L, R> {
+public class Tuple<L, R> {
 	private L left;
 	private R right;
 
-	public Touple() {
+	public Tuple() {
 
 	}
 
-	public Touple(L left, R right) {
+	public Tuple(L left, R right) {
 		this.right = right;
 		this.left = left;
 	}
@@ -46,7 +46,7 @@ public class Touple<L, R> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Touple<?, ?> other = (Touple<?, ?>) obj;
+		Tuple<?, ?> other = (Tuple<?, ?>) obj;
 		if (left == null) {
 			if (other.left != null)
 				return false;
