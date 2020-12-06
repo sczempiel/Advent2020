@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import util.AdventUtils;
-import util.Tuple;
 
 public class Day5Task1Main {
 
