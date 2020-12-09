@@ -139,6 +139,12 @@ public class AdventUtils {
 		return input;
 	}
 
+	public static List<Long> getLongInput(int day) throws IOException {
+		List<Long> input = getStringInput(day).stream().map(line -> Long.valueOf(line)).collect(Collectors.toList());
+		input = Collections.unmodifiableList(input);
+		return input;
+	}
+
 	public static List<String> getStringInput(int day) throws IOException {
 		List<String> input = inputs.get(day);
 		if (input == null) {
