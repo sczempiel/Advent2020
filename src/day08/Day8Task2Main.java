@@ -17,7 +17,7 @@ public class Day8Task2Main {
 
 			List<Tuple<String, Integer>> code = startValues.stream().map(l -> {
 				String[] splitted = l.split(" ");
-				return new Tuple<>(splitted[0], Integer.valueOf(splitted[1]));
+				return Tuple.of(splitted[0], Integer.valueOf(splitted[1]));
 			}).collect(Collectors.toList());
 
 			Long result = null;

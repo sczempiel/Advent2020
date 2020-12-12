@@ -17,7 +17,7 @@ public class Day8Task1Main {
 
 			List<Tuple<String, Integer>> code = startValues.stream().map(l -> {
 				String[] splitted = l.split(" ");
-				return new Tuple<>(splitted[0], Integer.valueOf(splitted[1]));
+				return Tuple.of(splitted[0], Integer.valueOf(splitted[1]));
 			}).collect(Collectors.toList());
 
 			AdventUtils.publishResult(8, 1, run(code));

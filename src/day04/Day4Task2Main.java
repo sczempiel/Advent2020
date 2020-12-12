@@ -43,7 +43,7 @@ public class Day4Task2Main {
 				for (String prop : splitted) {
 					String[] splitProp = prop.split(":");
 
-					found.add(new Tuple<>(splitProp[0], splitProp[1]));
+					found.add(Tuple.of(splitProp[0], splitProp[1]));
 				}
 
 			}

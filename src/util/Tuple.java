@@ -4,17 +4,16 @@ public class Tuple<L, R> {
 	private L left;
 	private R right;
 
-	public Tuple() {
+	public static <L, R> Tuple<L, R> of(L left, R right) {
+		Tuple<L, R> tuple = new Tuple<>();
+		tuple.right = right;
+		tuple.left = left;
 
-	}
-
-	public Tuple(L left, R right) {
-		this.right = right;
-		this.left = left;
+		return tuple;
 	}
 
 	public R getRight() {
-		return right;
+		return this.right;
 	}
 
 	public void setRight(R right) {
@@ -22,7 +21,7 @@ public class Tuple<L, R> {
 	}
 
 	public L getLeft() {
-		return left;
+		return this.left;
 	}
 
 	public void setLeft(L left) {
@@ -33,8 +32,8 @@ public class Tuple<L, R> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((left == null) ? 0 : left.hashCode());
-		result = prime * result + ((right == null) ? 0 : right.hashCode());
+		result = prime * result + ((this.left == null) ? 0 : this.left.hashCode());
+		result = prime * result + ((this.right == null) ? 0 : this.right.hashCode());
 		return result;
 	}
 
@@ -44,25 +43,25 @@ public class Tuple<L, R> {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (this.getClass() != obj.getClass())
 			return false;
 		Tuple<?, ?> other = (Tuple<?, ?>) obj;
-		if (left == null) {
+		if (this.left == null) {
 			if (other.left != null)
 				return false;
-		} else if (!left.equals(other.left))
+		} else if (!this.left.equals(other.left))
 			return false;
-		if (right == null) {
+		if (this.right == null) {
 			if (other.right != null)
 				return false;
-		} else if (!right.equals(other.right))
+		} else if (!this.right.equals(other.right))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Touple [left=" + left + ", right=" + right + "]";
+		return "Touple [left=" + this.left + ", right=" + this.right + "]";
 	}
 
 }

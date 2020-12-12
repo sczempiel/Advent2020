@@ -244,7 +244,7 @@ public class AdventUtils {
 
 		for (int y = smallestY; y <= biggestY; y++) {
 			for (int x = smallestX; x <= biggestX; x++) {
-				sb.append(printValue.apply(map.get(new Tuple<>(y, x))));
+				sb.append(printValue.apply(map.get(Tuple.of(y, x))));
 			}
 
 			if (y < biggestY) {

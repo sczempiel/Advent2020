@@ -17,14 +17,14 @@ public class Day6Task2Main {
 
 			List<Tuple<Integer, Map<Character, Integer>>> answers = new ArrayList<>();
 			Map<Character, Integer> chars = new HashMap<>();
-			Tuple<Integer, Map<Character, Integer>> group = new Tuple<>(0, chars);
+			Tuple<Integer, Map<Character, Integer>> group = Tuple.of(0, chars);
 			answers.add(group);
 
 			for (String line : startValues) {
 
 				if (line.isEmpty()) {
 					chars = new HashMap<>();
-					group = new Tuple<>(0, chars);
+					group = Tuple.of(0, chars);
 					answers.add(group);
 					continue;
 				}

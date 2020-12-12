@@ -35,7 +35,7 @@ public class Day7Task2Main {
 					Matcher matcher = BAG_PATTERN.matcher(raw);
 
 					if (matcher.matches()) {
-						containing.add(new Tuple<>(matcher.group(2), Integer.valueOf(matcher.group(1))));
+						containing.add(Tuple.of(matcher.group(2), Integer.valueOf(matcher.group(1))));
 					}
 				}
 
