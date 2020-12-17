@@ -1,13 +1,7 @@
 package day13;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 import util.AdventUtils;
 import util.Tuple;
@@ -28,64 +22,22 @@ public class Day13Task2Main {
 				busses.add(Tuple.of(Long.valueOf(startValues[i]), new Long(i)));
 			}
 
-			ExecutorService executor = Executors.newFixedThreadPool(6);
+			while (busses.size() > 1) {
+				List<Tuple<Long, Long>> result = new ArrayList<>();
 
-			List<Callable<Tuple<Long, Long>>> tasks = new ArrayList<>();
-			for (int i = 0; i < busses.size(); i = i + 2) {
-				final int bus0 = i;
-				final int bus1 = i + 1;
-
-				tasks.add(() -> {
-					if (bus1 < busses.size()) {
-						Tuple<Long, Long> result = reduce(busses.get(bus0), busses.get(bus1));
-						return result;
+				for (int i = 0; i < busses.size(); i = i + 2) {
+					if (i + 1 < busses.size()) {
+						result.add(reduce(busses.get(i), busses.get(i + 1)));
 					} else {
-						return busses.get(bus0);
-					}
-				});
-
-			}
-
-			List<Tuple<Long, Long>> result = executor.invokeAll(tasks).stream().map(f -> {
-				try {
-					return f.get();
-				} catch (InterruptedException | ExecutionException e) {
-					e.printStackTrace();
-					System.exit(-1);
-					return null;
-				}
-			}).sorted(Comparator.comparing(Tuple::getLeft)).collect(Collectors.toList());
-			executor.shutdown();
-
-			List<Long> currentValues = result.stream().map(Tuple::getRight).collect(Collectors.toList());
-
-			boolean matches = false;
-			while (!matches) {
-
-				matches = true;
-				currentValues.set(0, currentValues.get(0) + result.get(0).getLeft());
-
-				for (int i = 1; i < result.size(); i++) {
-
-					long prevValue = currentValues.get(i - 1);
-					long currentValue = currentValues.get(i);
-					long increment = result.get(i).getLeft();
-
-					while (prevValue > currentValue) {
-						currentValue += increment;
+						result.add(reduce(busses.get(i), busses.get(i - 1)));
 					}
 
-					currentValues.set(i, currentValue);
-
-					if (currentValue != prevValue) {
-						matches = false;
-						break;
-					}
 				}
 
+				busses = result;
 			}
 
-			AdventUtils.publishResult(13, 2, currentValues.get(0));
+			AdventUtils.publishResult(13, 2, busses.get(0).getRight() * -1);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -124,6 +76,7 @@ public class Day13Task2Main {
 
 		}
 
-		return Tuple.of(loop, turns.get(0));
+		// return the intervall with the offset
+		return Tuple.of(loop, turns.get(0) * -1);
 	}
 }
