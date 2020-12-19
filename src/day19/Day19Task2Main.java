@@ -6,11 +6,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import util.AdventUtils;
 
-public class Day19Task1Main {
+public class Day19Task2Main {
 
 	private static Map<String, String> rawRules = new HashMap<>();
 	private static Map<String, String> rules = new HashMap<>();
@@ -22,26 +21,26 @@ public class Day19Task1Main {
 			readData();
 
 			String regex = resolve0();
+			AdventUtils.publishExtra(19, 2, regex, "regex");
 
-			AdventUtils.publishExtra(19, 1, regex, "regex");
-
-			Pattern pattern = Pattern.compile(regex);
-			int count = 0;
-
-			for (String msg : messages) {
-				if (pattern.matcher(msg).matches()) {
-					count++;
-				}
-			}
-
-			AdventUtils.publishResult(19, 1, count);
+			AdventUtils.publishResult(19, 2, "");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	private static String resolve0() {
-		return "^" + resolveSolution("0") + "$";
+		return "^" + resolve8() + resolve11() + "$";
+	}
+
+	private static String resolve11() {
+		String solutions42 = resolveSolution("42");
+		String solutions31 = resolveSolution("31");
+		return "(" + solutions42 + "(?1)?" + solutions31 + ")";
+	}
+
+	private static String resolve8() {
+		return resolveSolution("8") + "+";
 	}
 
 	private static String resolveSolution(String ruleId) {
@@ -106,5 +105,4 @@ public class Day19Task1Main {
 			}
 		}
 	}
-
 }
