@@ -3,6 +3,7 @@ package day23;
 import java.io.IOException;
 
 import util.AdventUtils;
+import util.map.node.NodeMap;
 
 public class Day23Task1Main {
 
@@ -10,32 +11,32 @@ public class Day23Task1Main {
 		try {
 			String startValue = AdventUtils.getStringInput(23).get(0);
 
-			NodeMap<Integer, Integer> cups = new NodeMap<>(true);
+			NodeMap<Long, Long> cups = new NodeMap<>(true);
 
-			int maxValue = 0;
+			long maxValue = 0;
 			for (char c : startValue.toCharArray()) {
-				int num = Integer.parseInt(String.valueOf(c));
-				cups.add(num);
+				long num = Long.parseLong(String.valueOf(c));
+				cups.put(num, null);
 
 				if (num > maxValue) {
 					maxValue = num;
 				}
 			}
 
-			Node<Integer, Integer> currNode = cups.get(Integer.parseInt(String.valueOf(startValue.charAt(0))));
+			Long currNum = Long.parseLong(String.valueOf(startValue.charAt(0)));
 
 			for (int i = 1; i <= 100; i++) {
 
-				Node<Integer, Integer> removedCup1 = currNode.getRight();
-				Node<Integer, Integer> removedCup2 = removedCup1.getRight();
-				Node<Integer, Integer> removedCup3 = removedCup2.getRight();
+				Long removedCup1 = cups.getRight(currNum);
+				Long removedCup2 = cups.getRight(removedCup1);
+				Long removedCup3 = cups.getRight(removedCup2);
 
 				cups.remove(removedCup1);
 				cups.remove(removedCup2);
 				cups.remove(removedCup3);
 
-				Node<Integer, Integer> targetNode = null;
-				int targetNum = currNode.getKey();
+				Long targetNode = null;
+				long targetNum = currNum;
 
 				while (targetNode == null) {
 					targetNum--;
@@ -44,23 +45,25 @@ public class Day23Task1Main {
 						targetNum = maxValue;
 					}
 
-					targetNode = cups.get(targetNum);
+					if (cups.containsKey(targetNum)) {
+						targetNode = targetNum;
+					}
 				}
 
-				cups.add(removedCup1, targetNode);
-				cups.add(removedCup2, removedCup1);
-				cups.add(removedCup3, removedCup2);
+				cups.put(removedCup1, null, targetNode);
+				cups.put(removedCup2, null, removedCup1);
+				cups.put(removedCup3, null, removedCup2);
 
-				currNode = currNode.getRight();
+				currNum = cups.getRight(currNum);
 
 			}
 
 			StringBuilder sb = new StringBuilder();
-			Node<Integer, Integer> node = cups.get(1).getRight();
+			Long node = cups.getRight(1l);
 
-			while (node.getKey() != 1) {
-				sb.append(node.getKey());
-				node = node.getRight();
+			while (node != 1) {
+				sb.append(node);
+				node = cups.getRight(node);
 			}
 
 			AdventUtils.publishResult(23, 1, sb.toString());

@@ -3,6 +3,7 @@ package day23;
 import java.io.IOException;
 
 import util.AdventUtils;
+import util.map.node.NodeMap;
 
 public class Day23Task2Main {
 
@@ -16,7 +17,7 @@ public class Day23Task2Main {
 
 			for (char c : startValue.toCharArray()) {
 				long num = Long.parseLong(String.valueOf(c));
-				cups.add(num);
+				cups.put(num, null);
 
 				if (num > maxValue) {
 					maxValue = num;
@@ -25,23 +26,23 @@ public class Day23Task2Main {
 
 			while (maxValue < 1000000) {
 				maxValue++;
-				cups.add(maxValue);
+				cups.put(maxValue, null);
 			}
 
-			Node<Long, Long> currNode = cups.get(Long.parseLong(String.valueOf(startValue.charAt(0))));
+			Long currNum = Long.parseLong(String.valueOf(startValue.charAt(0)));
 
 			for (int i = 1; i <= 10000000; i++) {
 
-				Node<Long, Long> removedCup1 = currNode.getRight();
-				Node<Long, Long> removedCup2 = removedCup1.getRight();
-				Node<Long, Long> removedCup3 = removedCup2.getRight();
+				Long removedCup1 = cups.getRight(currNum);
+				Long removedCup2 = cups.getRight(removedCup1);
+				Long removedCup3 = cups.getRight(removedCup2);
 
 				cups.remove(removedCup1);
 				cups.remove(removedCup2);
 				cups.remove(removedCup3);
 
-				Node<Long, Long> targetNode = null;
-				long targetNum = currNode.getKey();
+				Long targetNode = null;
+				long targetNum = currNum;
 
 				while (targetNode == null) {
 					targetNum--;
@@ -50,20 +51,24 @@ public class Day23Task2Main {
 						targetNum = maxValue;
 					}
 
-					targetNode = cups.get(targetNum);
+					if (cups.containsKey(targetNum)) {
+						targetNode = targetNum;
+					}
+
 				}
 
-				cups.add(removedCup1, targetNode);
-				cups.add(removedCup2, removedCup1);
-				cups.add(removedCup3, removedCup2);
+				cups.put(removedCup1, null, targetNode);
+				cups.put(removedCup2, null, removedCup1);
+				cups.put(removedCup3, null, removedCup2);
 
-				currNode = currNode.getRight();
+				currNum = cups.getRight(currNum);
 
 			}
 
-			Node<Long, Long> node = cups.get(1l);
+			Long node1 = cups.getRight(1l);
+			Long node2 = cups.getRight(node1);
 
-			AdventUtils.publishResult(23, 2, node.getRight().getKey() * node.getRight().getRight().getKey());
+			AdventUtils.publishResult(23, 2, node1 * node2);
 
 		} catch (IOException e) {
 			e.printStackTrace();

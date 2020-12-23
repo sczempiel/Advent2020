@@ -1,4 +1,4 @@
-package day23;
+package util.map.node;
 
 public class Node<K, V> {
 
