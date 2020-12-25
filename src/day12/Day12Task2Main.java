@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 import util.AdventUtils;
 import util.Tuple;
 
-// 19728 l
-// 13994 l
 public class Day12Task2Main {
 
 	private static char direction = 'E';

@@ -171,7 +171,7 @@ public class AdventUtils {
 		return sb.toString();
 	}
 
-	public static String printNum(int num, int length, char toAdd) {
+	public static String printNum(Number num, int length, char toAdd) {
 		String formated = String.valueOf(num);
 
 		while (formated.length() < length) {
@@ -181,7 +181,7 @@ public class AdventUtils {
 		return formated;
 	}
 
-	public static String printNum(int num, int length) {
+	public static String printNum(Number num, int length) {
 		return printNum(num, length, ' ');
 	}
 
