@@ -19,7 +19,7 @@ import util.StringUtils;
 import util.Tuple;
 
 // wrong answer of code 2176
-// guessed correct 2161
+// guessed correct 2161 as this are all hits that match the pattern #....##....##....###
 public class Day20Task2Main {
 	private static final String MIDDLE_SNAKE = "#....##....##....###";
 	private static final String BOTTOM_SNAKE = ".#..#..#..#..#..#...";
