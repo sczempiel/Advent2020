@@ -5,14 +5,6 @@ import java.util.List;
 
 public class Border {
 
-	public static enum Orientation {
-		NORMAL, NORM_ROTA_90, NORM_ROTA_180, NORM_ROTA_270,
-
-		FLIP_TB,
-
-		FLIP_RL_NORM, FLIP_RL_ROTA_90, FLIP_RL_ROTA_180, FLIP_RL_ROTA_270
-	}
-
 	public static enum Direction {
 		TOP, RIGHT, BOTTOM, LEFT
 	}

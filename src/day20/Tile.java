@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import day20.Border.Orientation;
-
 public class Tile {
 
 	private Long id;
