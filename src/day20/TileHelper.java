@@ -11,7 +11,6 @@ public class TileHelper {
 		if (orient.isFlip()) {
 			rotatable = flip(rotatable);
 		}
-
 		rotatable = rotate(rotatable, orient);
 
 		Border border = new Border();

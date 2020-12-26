@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
 import util.AdventUtils;
 import util.Tuple;
 
-// wrong answer of code 2176
-// guessed correct 2161 as this are all hits that match the pattern #....##....##....###
 public class Day20Task2Main {
 	private static final String MIDDLE_SNAKE = "#....##....##....###";
 	private static final String BOTTOM_SNAKE = ".#..#..#..#..#..#...";
@@ -93,23 +91,25 @@ public class Day20Task2Main {
 
 			for (int i = 1; i < rotatableImg.size() - 1; i++) {
 
-				Matcher middleMatcher = MIDDLE_PATTERN.matcher(rotatableImg.get(i));
+				for (int l = 0; l <= rotatableImg.get(i).length() - MIDDLE_SNAKE.length(); l++) {
 
-				while (middleMatcher.find()) {
-					int middleStart = middleMatcher.start();
-					int middleEnd = middleMatcher.end();
+					int end = l + MIDDLE_SNAKE.length();
 
-					if (rotatableImg.get(i - 1).charAt(middleEnd - 2) == '#') {
+					String middle = rotatableImg.get(i).substring(l, end);
+					Matcher middleMatcher = MIDDLE_PATTERN.matcher(middle);
 
-						String belowMiddle = rotatableImg.get(i + 1).substring(middleStart, middleEnd);
-						Matcher bottomMatcher = BOTTOM_PATTERN.matcher(belowMiddle);
+					if (middleMatcher.matches()) {
 
-						if (bottomMatcher.matches()) {
-							snakeCount++;
+						if (rotatableImg.get(i - 1).charAt(end - 2) == '#') {
+
+							String belowMiddle = rotatableImg.get(i + 1).substring(l, end);
+							Matcher bottomMatcher = BOTTOM_PATTERN.matcher(belowMiddle);
+
+							if (bottomMatcher.matches()) {
+								snakeCount++;
+							}
 						}
-
 					}
-
 				}
 			}
 
@@ -138,6 +138,7 @@ public class Day20Task2Main {
 				}
 
 				image.add(imgRow);
+
 			}
 
 		}
